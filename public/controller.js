@@ -3,7 +3,7 @@
         .controller("ListCtrl", ListCtrl)
         .controller("DetailCtrl", DetailCtrl);
 
-    function ListCtrl(dbService) {
+    function ListCtrl(dbService, $stateParams) {
         var vm = this;
 
         dbService.list()
@@ -11,7 +11,7 @@
                 vm.films = films;
             })
             .catch(function (err) {
-                console.log("Somer Error Occured", err);
+                console.log("Some Error Occured", err);
             });
     }
 

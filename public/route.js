@@ -22,5 +22,4 @@
 
     FilmConfig.$inject = ["$stateProvider", "$urlRouterProvider"];
 
-
 })();
