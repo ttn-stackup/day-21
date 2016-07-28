@@ -4,11 +4,11 @@
         .controller("DetailCtrl", DetailCtrl)
         .controller("LoginCtrl", LoginCtrl);
 
-    function ListCtrl(dbService, $stateParams, $scope) {
+    function ListCtrl(dbService, $stateParams, $scope, $state) {
         var vm = this;
 
         $scope.$on("event:auth-loginRequired", function () {
-            console.log("Login Required");
+            $state.go("login");
         });
 
         $scope.$on("event:auth-loginConfirmed", function () {
@@ -28,7 +28,7 @@
             });
     }
 
-    ListCtrl.$inject = ["dbService", "$stateParams", "$scope"];
+    ListCtrl.$inject = ["dbService", "$stateParams", "$scope", "$state"];
 
     function DetailCtrl($stateParams, dbService) {
         var vm = this;
@@ -42,7 +42,7 @@
     DetailCtrl.$inject = ["$stateParams", "dbService"];
 
 
-    function LoginCtrl($http, authService){
+    function LoginCtrl($http, authService, $state){
         var vm = this;
 
         vm.login = function () {
@@ -50,12 +50,15 @@
                 .then(function () {
                     $state.go("list");
                     authService.loginConfirmed();
+                })
+                .catch(function () {
+                    vm.message = "Login not successful"
                 });
         };
 
     }
 
-    LoginCtrl.$inject = ["$http", "authService"];
+    LoginCtrl.$inject = ["$http", "authService", "$state"];
 
 
 }());
