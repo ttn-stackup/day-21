@@ -1,7 +1,8 @@
 (function () {
     angular.module("FilmApp")
         .controller("ListCtrl", ListCtrl)
-        .controller("DetailCtrl", DetailCtrl);
+        .controller("DetailCtrl", DetailCtrl)
+        .controller("LoginCtrl", LoginCtrl);
 
     function ListCtrl(dbService, $stateParams, $scope) {
         var vm = this;
@@ -39,4 +40,22 @@
     }
 
     DetailCtrl.$inject = ["$stateParams", "dbService"];
+
+
+    function LoginCtrl($http, authService){
+        var vm = this;
+
+        vm.login = function () {
+            $http.post("/login", vm.user)
+                .then(function () {
+                    $state.go("list");
+                    authService.loginConfirmed();
+                });
+        };
+
+    }
+
+    LoginCtrl.$inject = ["$http", "authService"];
+
+
 }());

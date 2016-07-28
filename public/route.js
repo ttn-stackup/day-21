@@ -15,6 +15,11 @@
                 url: "/detail/:filmId",
                 templateUrl: "/views/detail.html",
                 controller: "DetailCtrl as ctrl"
+            })
+            .state("login", {
+                url: "/login",
+                templateUrl: "/views/login.html",
+                controller: "LoginCtrl as ctrl"
             });
 
         $urlRouterProvider.otherwise("/list");
