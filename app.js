@@ -15,7 +15,7 @@ var pool = mysql.createPool({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: process.env.MYSQL_PASSWORD,
+    password: "igdefault",
     database: "sakila",
     connectionLimit: 4
 });
@@ -64,7 +64,7 @@ app.get("/api/films", function (req, res) {
 
 
 app.get("/api/films/:filmId", function (req, res) {
-    findOne([req.params.filmId])
+    findOne([req.params.filmId, req.user.id])
         .then(function (film) {
             res.status(200).json(film[0]);
         })
