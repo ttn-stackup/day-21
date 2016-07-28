@@ -1,10 +1,10 @@
 var LocalStrategy = require("passport-local").Strategy;
-
+//Setup local strategy
 module.exports = function (app, passport) {
-    function authenticate(username, password, done){
-        var valid = true;
+    function authenticate(username, password, done) {
+        var valid = username == "username@email.com" ? true : false;
 
-        if(valid){
+        if (valid) {
             return done(null, username);
         }
 
@@ -17,7 +17,7 @@ module.exports = function (app, passport) {
     }, authenticate));
 
     passport.serializeUser(function (username, done) {
-        done(null, username);
+        done(null, username)
     });
 
     passport.deserializeUser(function (username, done) {
@@ -25,4 +25,3 @@ module.exports = function (app, passport) {
     });
 
 };
-

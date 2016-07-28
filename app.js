@@ -10,12 +10,14 @@ var passport = require("passport");
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// Initialize session
 app.use(session({
     secret: "something-crypric",
-    saved: true,
+    resave: false,
     saveUninitialized: true
 }));
 
+//Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -23,12 +25,13 @@ require("./auth")(app, passport);
 require("./routes")(app);
 
 app.post("/login", passport.authenticate("local", {
-    successRedirect: "/status/202",
+    successRedirect: "/status/201",
     failureRedirect: "/status/403"
 }));
 
-
 app.get("/status/:code", function (req, res) {
+
+    console.log("Saved user------",req.user);
 
     var code = parseInt(req.params.code);
 
