@@ -22,7 +22,7 @@ app.use(passport.session());
 
 
 require("./auth")(app, passport);
-require("./routes")(app,passport);
+require("./routes")(app, passport);
 
 app.listen(3000, function () {
     console.log("Listening on ", 3000)
