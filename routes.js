@@ -1,7 +1,7 @@
 var express = require("express");
 var Film = require("./film");
 
-module.exports = function (app) {
+module.exports = function (app, passport) {
     app.get("/api/films", function (req, res) {
         Film.findAll()
             .then(function (films) {
@@ -27,4 +27,18 @@ module.exports = function (app) {
 
     app.use(express.static(__dirname + "/public"));
     app.use("/bower_components", express.static(__dirname + "/bower_components"));
+
+    app.post("/login",
+        passport.authenticate("local", {
+            successRedirect: "/status/202",
+            failureRedirect: "/status/403"
+        })
+    );
+
+    app.use("/status/:code", function (req, res) {
+        var code = parseInt(req.params.code);
+        console.log(code);
+        res.status(code).end();
+
+    });
 };
