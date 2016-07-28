@@ -3,8 +3,20 @@
         .controller("ListCtrl", ListCtrl)
         .controller("DetailCtrl", DetailCtrl);
 
-    function ListCtrl(dbService, $stateParams) {
+    function ListCtrl(dbService, $stateParams, $scope) {
         var vm = this;
+
+        $scope.$on("event:auth-loginRequired", function () {
+            console.log("Login Required");
+        });
+
+        $scope.$on("event:auth-loginConfirmed", function () {
+            console.log("Login Confirmed")
+        });
+
+        $scope.$on("event:auth-forbidden", function () {
+            console.log("Forbidden");
+        });
 
         dbService.list()
             .then(function (films) {
@@ -15,7 +27,7 @@
             });
     }
 
-    ListCtrl.$inject = ["dbService"];
+    ListCtrl.$inject = ["dbService", "$stateParams", "$scope"];
 
     function DetailCtrl($stateParams, dbService) {
         var vm = this;

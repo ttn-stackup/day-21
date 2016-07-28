@@ -1,3 +1,3 @@
 (function () {
-    angular.module("FilmApp", ["ui.router"]);
+    angular.module("FilmApp", ["ui.router", "http-auth-interceptor"]);
 })();

@@ -1,7 +1,12 @@
 var express = require("express");
 var Film = require("./film");
+var watch = require("connect-ensure-login");
 
 module.exports = function (app) {
+
+    app.use("/api", watch.ensureLoggedIn("/status/401"))
+
+
     app.get("/api/films", function (req, res) {
         Film.findAll()
             .then(function (films) {
