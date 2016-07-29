@@ -22,11 +22,9 @@
                 controller: "LoginCtrl as ctrl"
             });
 
-        $urlRouterProvider.otherwise("/login");
+        $urlRouterProvider.otherwise("/list");
     }
 
     FilmConfig.$inject = ["$stateProvider", "$urlRouterProvider"];
 
 })();
-
-

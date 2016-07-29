@@ -38,17 +38,12 @@ app.get("/status/:code", function (req, res) {
     res.status(code).end();
 });
 
+app.get("/logout", function(req, res) {
+    req.logout();             // clears the passport session
+    req.session.destroy();    // destroys all session related data
+    res.redirect("/")         // redirect to "/" of the application
+})
+
 app.listen(3000, function () {
     console.log("Listening on ", 3000)
 });
-
-
-
-
-
-
-
-
-
-
-
