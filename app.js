@@ -31,7 +31,7 @@ app.post("/login", passport.authenticate("local", {
 
 app.get("/status/:code", function (req, res) {
 
-    console.log("Saved user------",req.user);
+    //console.log("Saved user------", req.user);
 
     var code = parseInt(req.params.code);
 
